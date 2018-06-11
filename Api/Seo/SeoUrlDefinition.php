@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Shopware\Storefront\Api\Seo\Definition;
+namespace Shopware\Storefront\Api\Seo;
 
 use Shopware\Core\Framework\ORM\EntityDefinition;
 use Shopware\Core\Framework\ORM\EntityExtensionInterface;
@@ -16,12 +16,8 @@ use Shopware\Core\Framework\ORM\Write\Flag\PrimaryKey;
 use Shopware\Core\Framework\ORM\Write\Flag\Required;
 use Shopware\Core\System\Touchpoint\TouchpointDefinition;
 use Shopware\Storefront\Api\Seo\Collection\SeoUrlBasicCollection;
-use Shopware\Storefront\Api\Seo\Collection\SeoUrlDetailCollection;
-use Shopware\Storefront\Api\Seo\Event\SeoUrl\SeoUrlDeletedEvent;
-use Shopware\Storefront\Api\Seo\Event\SeoUrl\SeoUrlWrittenEvent;
 use Shopware\Storefront\Api\Seo\Repository\SeoUrlRepository;
 use Shopware\Storefront\Api\Seo\Struct\SeoUrlBasicStruct;
-use Shopware\Storefront\Api\Seo\Struct\SeoUrlDetailStruct;
 
 class SeoUrlDefinition extends EntityDefinition
 {
@@ -65,43 +61,13 @@ class SeoUrlDefinition extends EntityDefinition
         ]);
     }
 
-    public static function getRepositoryClass(): string
-    {
-        return SeoUrlRepository::class;
-    }
-
     public static function getBasicCollectionClass(): string
     {
         return SeoUrlBasicCollection::class;
     }
 
-    public static function getDeletedEventClass(): string
-    {
-        return SeoUrlDeletedEvent::class;
-    }
-
-    public static function getWrittenEventClass(): string
-    {
-        return SeoUrlWrittenEvent::class;
-    }
-
     public static function getBasicStructClass(): string
     {
         return SeoUrlBasicStruct::class;
-    }
-
-    public static function getTranslationDefinitionClass(): ?string
-    {
-        return null;
-    }
-
-    public static function getDetailStructClass(): string
-    {
-        return SeoUrlDetailStruct::class;
-    }
-
-    public static function getDetailCollectionClass(): string
-    {
-        return SeoUrlDetailCollection::class;
     }
 }
