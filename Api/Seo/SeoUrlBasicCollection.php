@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Shopware\Storefront\Api\Seo\Collection;
+namespace Shopware\Storefront\Api\Seo;
 
 use Shopware\Core\Framework\ORM\EntityCollection;
-use Shopware\Storefront\Api\Seo\Struct\SeoUrlBasicStruct;
+use Shopware\Storefront\Api\Seo\SeoUrlBasicStruct;
 
 class SeoUrlBasicCollection extends EntityCollection
 {
