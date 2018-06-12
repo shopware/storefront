@@ -3,40 +3,40 @@
 namespace Shopware\Storefront\Api\Seo;
 
 use Shopware\Core\Framework\ORM\EntityCollection;
-use Shopware\Storefront\Api\Seo\SeoUrlBasicStruct;
 
-class SeoUrlBasicCollection extends EntityCollection
+
+class SeoUrlCollection extends EntityCollection
 {
     /**
-     * @var SeoUrlBasicStruct[]
+     * @var SeoUrlStruct[]
      */
     protected $elements = [];
 
-    public function get(string $id): ? SeoUrlBasicStruct
+    public function get(string $id): ? SeoUrlStruct
     {
         return parent::get($id);
     }
 
-    public function current(): SeoUrlBasicStruct
+    public function current(): SeoUrlStruct
     {
         return parent::current();
     }
 
     public function getApplicationIds(): array
     {
-        return $this->fmap(function (SeoUrlBasicStruct $seoUrl) {
+        return $this->fmap(function (SeoUrlStruct $seoUrl) {
             return $seoUrl->getApplicationId();
         });
     }
 
-    public function filterByApplicationId(string $id): SeoUrlBasicCollection
+    public function filterByApplicationId(string $id): SeoUrlCollection
     {
-        return $this->filter(function (SeoUrlBasicStruct $seoUrl) use ($id) {
+        return $this->filter(function (SeoUrlStruct $seoUrl) use ($id) {
             return $seoUrl->getApplicationId() === $id;
         });
     }
 
-    public function getByPathInfo(string $pathInfo): ?SeoUrlBasicStruct
+    public function getByPathInfo(string $pathInfo): ?SeoUrlStruct
     {
         foreach ($this->elements as $element) {
             if ($element->getPathInfo() === $pathInfo) {
@@ -47,7 +47,7 @@ class SeoUrlBasicCollection extends EntityCollection
         return null;
     }
 
-    public function getBySeoPathInfo(string $seoPathInfo): ?SeoUrlBasicStruct
+    public function getBySeoPathInfo(string $seoPathInfo): ?SeoUrlStruct
     {
         foreach ($this->elements as $element) {
             if ($element->getSeoPathInfo() === $seoPathInfo) {
@@ -60,7 +60,7 @@ class SeoUrlBasicCollection extends EntityCollection
 
     public function getForeignKeys()
     {
-        return $this->fmap(function (SeoUrlBasicStruct $seoUrl) {
+        return $this->fmap(function (SeoUrlStruct $seoUrl) {
             return $seoUrl->getForeignKey();
         });
     }
@@ -89,6 +89,6 @@ class SeoUrlBasicCollection extends EntityCollection
 
     protected function getExpectedClass(): string
     {
-        return SeoUrlBasicStruct::class;
+        return SeoUrlStruct::class;
     }
 }
