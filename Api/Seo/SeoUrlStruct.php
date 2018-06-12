@@ -4,7 +4,7 @@ namespace Shopware\Storefront\Api\Seo;
 
 use Shopware\Core\Framework\ORM\Entity;
 
-class SeoUrlBasicStruct extends Entity
+class SeoUrlStruct extends Entity
 {
     /**
      * @var string
