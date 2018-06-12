@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Shopware\Storefront\Api\Seo\Struct;
+namespace Shopware\Storefront\Api\Seo;
 
 use Shopware\Core\Framework\ORM\Entity;
 
