@@ -1,19 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace Shopware\Storefront\Page\AccountProfile;
+namespace Shopware\Storefront\Page\Product;
 
 use Shopware\Core\Checkout\CheckoutContext;
 use Shopware\Core\Framework\Routing\InternalRequest;
-use Shopware\Storefront\Pagelet\AccountProfile\AccountProfilePageletLoader;
 use Shopware\Storefront\Pagelet\Header\HeaderPageletLoader;
+use Shopware\Storefront\Pagelet\ProductDetail\ProductDetailPageletLoader;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class AccountProfilePageLoader
+class ProductPageLoader
 {
     /**
-     * @var AccountProfilePageletLoader
+     * @var ProductDetailPageletLoader
      */
-    private $accountProfilePageletLoader;
+    private $productDetailPageletLoader;
 
     /**
      * @var HeaderPageletLoader
@@ -26,20 +26,20 @@ class AccountProfilePageLoader
     private $eventDispatcher;
 
     public function __construct(
-        AccountProfilePageletLoader $accountProfilePageletLoader,
+        ProductDetailPageletLoader $productDetailPageletLoader,
         HeaderPageletLoader $headerPageletLoader,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->accountProfilePageletLoader = $accountProfilePageletLoader;
+        $this->productDetailPageletLoader = $productDetailPageletLoader;
         $this->headerPageletLoader = $headerPageletLoader;
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function load(InternalRequest $request, CheckoutContext $context): AccountProfilePageStruct
+    public function load(InternalRequest $request, CheckoutContext $context): ProductPageStruct
     {
-        $page = new AccountProfilePageStruct();
-        $page->setAccountProfile(
-            $this->accountProfilePageletLoader->load($request, $context)
+        $page = new ProductPageStruct();
+        $page->setProductDetail(
+            $this->productDetailPageletLoader->load($request, $context)
         );
 
         $page->setHeader(
@@ -47,8 +47,8 @@ class AccountProfilePageLoader
         );
 
         $this->eventDispatcher->dispatch(
-            AccountProfilePageLoadedEvent::NAME,
-            new AccountProfilePageLoadedEvent($page, $context, $request)
+            ProductPageLoadedEvent::NAME,
+            new ProductPageLoadedEvent($page, $context, $request)
         );
 
         return $page;

@@ -1,19 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace Shopware\Storefront\Page\AccountProfile;
+namespace Shopware\Storefront\Page\Login;
 
 use Shopware\Core\Checkout\CheckoutContext;
 use Shopware\Core\Framework\Routing\InternalRequest;
-use Shopware\Storefront\Pagelet\AccountProfile\AccountProfilePageletLoader;
+use Shopware\Storefront\Pagelet\Login\LoginPageletLoader;
 use Shopware\Storefront\Pagelet\Header\HeaderPageletLoader;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class AccountProfilePageLoader
+class LoginPageLoader
 {
     /**
-     * @var AccountProfilePageletLoader
+     * @var LoginPageletLoader
      */
-    private $accountProfilePageletLoader;
+    private $accountLoginPageletLoader;
 
     /**
      * @var HeaderPageletLoader
@@ -26,20 +26,20 @@ class AccountProfilePageLoader
     private $eventDispatcher;
 
     public function __construct(
-        AccountProfilePageletLoader $accountProfilePageletLoader,
+        LoginPageletLoader $accountLoginPageletLoader,
         HeaderPageletLoader $headerPageletLoader,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->accountProfilePageletLoader = $accountProfilePageletLoader;
+        $this->accountLoginPageletLoader = $accountLoginPageletLoader;
         $this->headerPageletLoader = $headerPageletLoader;
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function load(InternalRequest $request, CheckoutContext $context): AccountProfilePageStruct
+    public function load(InternalRequest $request, CheckoutContext $context): LoginPageStruct
     {
-        $page = new AccountProfilePageStruct();
-        $page->setAccountProfile(
-            $this->accountProfilePageletLoader->load($request, $context)
+        $page = new LoginPageStruct();
+        $page->setAccountLogin(
+            $this->accountLoginPageletLoader->load($request, $context)
         );
 
         $page->setHeader(
@@ -47,8 +47,8 @@ class AccountProfilePageLoader
         );
 
         $this->eventDispatcher->dispatch(
-            AccountProfilePageLoadedEvent::NAME,
-            new AccountProfilePageLoadedEvent($page, $context, $request)
+            LoginPageLoadedEvent::NAME,
+            new LoginPageLoadedEvent($page, $context, $request)
         );
 
         return $page;
