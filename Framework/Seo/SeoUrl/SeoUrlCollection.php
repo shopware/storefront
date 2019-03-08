@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Shopware\Storefront\Framework\Seo;
+namespace Shopware\Storefront\Framework\Seo\SeoUrl;
 
 use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
 
@@ -15,14 +15,14 @@ use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
  */
 class SeoUrlCollection extends EntityCollection
 {
-    public function getApplicationIds(): array
+    public function getSalesChannelIds(): array
     {
         return $this->fmap(function (SeoUrlEntity $seoUrl) {
             return $seoUrl->getSalesChannelId();
         });
     }
 
-    public function filterByApplicationId(string $id): SeoUrlCollection
+    public function filterBySalesChannelId(string $id): SeoUrlCollection
     {
         return $this->filter(function (SeoUrlEntity $seoUrl) use ($id) {
             return $seoUrl->getSalesChannelId() === $id;
@@ -61,7 +61,7 @@ class SeoUrlCollection extends EntityCollection
     public function hasForeignKey(string $name, string $foreignKey): bool
     {
         foreach ($this->getIterator() as $element) {
-            if ($element->getForeignKey() === $foreignKey && $element->getName() === $name) {
+            if ($element->getForeignKey() === $foreignKey && $element->getRouteName() === $name) {
                 return true;
             }
         }

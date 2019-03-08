@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Shopware\Storefront\Framework\Seo;
+namespace Shopware\Storefront\Framework\Seo\SeoUrl;
 
 use Shopware\Core\Framework\DataAbstractionLayer\Entity;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityIdTrait;
@@ -18,7 +18,7 @@ class SeoUrlEntity extends Entity
     /**
      * @var string
      */
-    protected $name;
+    protected $routeName;
 
     /**
      * @var string
@@ -44,6 +44,21 @@ class SeoUrlEntity extends Entity
      * @var bool
      */
     protected $isModified;
+
+    /**
+     * @var bool
+     */
+    protected $isDeleted;
+
+    /**
+     * @var bool
+     */
+    protected $isValid;
+
+    /**
+     * @var int
+     */
+    protected $autoIncrement;
 
     /**
      * @var \DateTimeInterface|null
@@ -80,14 +95,14 @@ class SeoUrlEntity extends Entity
         $this->salesChannelId = $salesChannelId;
     }
 
-    public function getName(): string
+    public function getRouteName(): string
     {
-        return $this->name;
+        return $this->routeName;
     }
 
-    public function setName(string $name): void
+    public function setRouteName(string $routeName): void
     {
-        $this->name = $name;
+        $this->routeName = $routeName;
     }
 
     public function getForeignKey(): string
@@ -145,6 +160,26 @@ class SeoUrlEntity extends Entity
         return $this->createdAt;
     }
 
+    public function getIsDeleted(): bool
+    {
+        return $this->isDeleted;
+    }
+
+    public function setIsDeleted(bool $isDeleted): void
+    {
+        $this->isDeleted = $isDeleted;
+    }
+
+    public function getIsValid(): bool
+    {
+        return $this->isValid;
+    }
+
+    public function setIsValid(bool $isValid): void
+    {
+        $this->isValid = $isValid;
+    }
+
     public function setCreatedAt(\DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
@@ -188,5 +223,15 @@ class SeoUrlEntity extends Entity
     public function setAttributes(?array $attributes): void
     {
         $this->attributes = $attributes;
+    }
+
+    public function getAutoIncrement(): int
+    {
+        return $this->autoIncrement;
+    }
+
+    public function setAutoIncrement(int $autoIncrement): void
+    {
+        $this->autoIncrement = $autoIncrement;
     }
 }

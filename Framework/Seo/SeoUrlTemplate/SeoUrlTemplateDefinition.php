@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Shopware\Storefront\Framework\Seo;
+namespace Shopware\Storefront\Framework\Seo\SeoUrlTemplate;
 
 use Shopware\Core\Framework\DataAbstractionLayer\EntityDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\AttributesField;
@@ -16,37 +16,39 @@ use Shopware\Core\Framework\DataAbstractionLayer\Field\UpdatedAtField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
 use Shopware\Core\System\SalesChannel\SalesChannelDefinition;
 
-class SeoUrlDefinition extends EntityDefinition
+class SeoUrlTemplateDefinition extends EntityDefinition
 {
     public static function getEntityName(): string
     {
-        return 'seo_url';
-    }
-
-    public static function getCollectionClass(): string
-    {
-        return SeoUrlCollection::class;
+        return 'seo_url_template';
     }
 
     public static function getEntityClass(): string
     {
-        return SeoUrlEntity::class;
+        return SeoUrlTemplateEntity::class;
+    }
+
+    public static function getCollectionClass(): string
+    {
+        return SeoUrlTemplateCollection::class;
     }
 
     protected static function defineFields(): FieldCollection
     {
         return new FieldCollection([
-            (new IdField('id', 'id'))->addFlags(new PrimaryKey(), new Required()),
-            (new FkField('sales_channel_id', 'salesChannelId', SalesChannelDefinition::class))->addFlags(new Required()),
-            (new StringField('name', 'name'))->addFlags(new Required()),
-            (new IdField('foreign_key', 'foreignKey'))->addFlags(new Required()),
-            (new StringField('path_info', 'pathInfo'))->addFlags(new Required()),
-            (new StringField('seo_path_info', 'seoPathInfo'))->addFlags(new Required()),
-            new BoolField('is_canonical', 'isCanonical'),
-            new BoolField('is_modified', 'isModified'),
-            new AttributesField(),
+            (new IdField('id', 'id'))->addFlags(new PrimaryKey()),
+            new FkField('sales_channel_id', 'salesChannelId', SalesChannelDefinition::class),
+
+            (new StringField('entity_name', 'entityName', 64))->addFlags(new Required()),
+            (new StringField('route_name', 'routeName'))->addFlags(new Required()),
+            (new StringField('template', 'template'))->addFlags(new Required()),
+
+            new BoolField('is_valid', 'isValid'),
+
             new CreatedAtField(),
             new UpdatedAtField(),
+
+            new AttributesField(),
             new ManyToOneAssociationField('salesChannel', 'sales_channel_id', SalesChannelDefinition::class, false),
         ]);
     }
