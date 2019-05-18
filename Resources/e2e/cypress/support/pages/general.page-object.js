@@ -30,8 +30,8 @@ export default class GeneralPageObject {
             contextMenuButton: '.sw-context-button__button',
 
             // Create/detail components
-            primaryButton: '.sw-button--primary',
-            dangerButton: '.sw-button--danger',
+            primaryButton: '.sw-btn-primary',
+            lightButton: '.btn-light',
             cardTitle: '.sw-card__title',
 
             // Notifications
