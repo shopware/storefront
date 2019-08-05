@@ -14,7 +14,7 @@
         "deliveryShippingTime": "Lieferzeit %shippingTime% Werktage",
         "deliveryShippingDelay": "Lieferzeit ca. 5 Werktage",
         "offcanvasCloseMenu": "Menü schließen",
-        "noscriptNotice": "Um unseren Shop in vollem Umfang nutzen zu k&ouml;nnen, empfehlen wir Ihnen Javascript in Ihrem Browser zu aktiveren.",
+        "noscriptNotice": "Um unseren Shop in vollem Umfang nutzen zu können, empfehlen wir Ihnen Javascript in Ihrem Browser zu aktiveren.",
         "toCategory": "Zur Kategorie",
         "readMore": "mehr erfahren",
         "mainMenu": "Hauptmenü",
@@ -25,7 +25,7 @@
         "required": "*",
         "requiredFields": "* hierbei handelt es sich um ein Pflichtfeld",
         "privacyTitle": "Datenschutz",
-        "privacyNotice": "Ich habe die <a data-toggle='modal' data-url='%tosUrl%' href='%tosUrl%' title='Datenschutzbestimmungen'>Datenschutzbestimmungen</a> zur Kenntnis genommen."
+        "privacyNotice": "Ich habe die <a data-toggle=\"modal\" data-url=\"%url%\" href=\"%url%\" title=\"Datenschutzbestimmungen\">Datenschutzbestimmungen</a> zur Kenntnis genommen."
     },
     "header": {
         "logoLink": "zur Startseite wechseln",
@@ -33,7 +33,7 @@
         "searchPlaceholder": "Suchbegriff...",
         "searchAllResults": "Alle Ergebnisse anzeigen",
         "searchResults": "Treffer",
-        "supportInfo": "<strong>Fragen zu Ihrer Bestellung?</strong><br /><strong><a href='tel:+4912345-123456789'>12345-123456789</a></strong> <small>Täglich 7:30 bis 22:00 Uhr</small>",
+        "supportInfo": "<strong>Fragen zu Ihrer Bestellung?</strong><br /><strong><a href=\"tel:+4912345-123456789\">12345-123456789</a></strong> <small>Täglich 7:30 bis 22:00 Uhr</small>",
         "indexLinkService": "Service/Hilfe",
         "searchNoResult": "Keine Suchergebnisse gefunden"
     },
@@ -52,6 +52,7 @@
         "VIOLATION::STRICT_CHECK_FAILED_ERROR": "%field% ist ungültig",
         "VIOLATION::CUSTOMER_EMAIL_NOT_UNIQUE": "Diese E-Mail-Adresse ist bereits registriert.",
         "VIOLATION::CUSTOMER_PASSWORD_NOT_CORRECT": "Das aktuelle Passwort ist nicht korrekt.",
+        "VIOLATION::TOO_SHORT_ERROR": "Eingabe ist zu kurz.",
         "message-default": "Leider ist etwas schief gelaufen",
         "message-404": "Die angeforderte Seite kann nicht gefunden werden.",
         "addToCartError": "Beim Hinzufügen zum Warenkorb ist ein Fehler aufgetreten.",
@@ -81,6 +82,9 @@
         "registerPersonalHeader": "Ich bin Neukunde",
         "registerAddressBillingHeader": "Ihre Adresse",
         "registerAddressShippingHeader": "Ihre abweichende Lieferadresse",
+        "personalTypeLabel": "Ich bin",
+        "personalTypePrivate": "Privat",
+        "personalTypeBusiness": "Gewerblich",
         "personalSalutationLabel": "Anrede",
         "personalSalutationPlaceholder": "Anrede",
         "personalTitleLabel": "Titel",
@@ -148,7 +152,10 @@
         "profileCredentialsTitle": "Ihre Zugangsdaten",
         "orRegister": "oder",
         "orRegisterLink": "registrieren",
-        "emailChangeSuccess": "E-Mail Adresse erfolgreich geändert",
+        "emailChangeSuccess": "E-Mail Adresse erfolgreich geändert.",
+        "emailChangeNoSuccess": "E-Mail Adresse konnte nicht geändert werden.",
+        "passwordChangeSuccess": "Passwort erfolgreich geändert",
+        "passwordChangeNoSuccess": "Passwort konnte nicht geändert werden.",
         "profilePasswordCreateNew": "Neues Passwort",
         "profilePasswordCurrent": "Ihr Aktuelles Passwort",
         "profileSaveChanges": "Änderungen Speichern",
@@ -195,8 +202,7 @@
         "orderItemTotal": "Gesamtsumme:",
         "orderItemComment": "Unser Kommentar",
         "orderItemCustomerComment": "Ihr Kommentar",
-        "orderItemInfoContent": "Inhalt",
-        "orderItemInfoBaseprice": "Grundpreis",
+        "orderItemInfoContent": "Inhalt:",
         "orderItemInfoCurrentPrice": "Aktueller Einzelpreis",
         "orderItemInfoFree": "GRATIS",
         "orderItemInfoNotAvailable": "Artikel ist für eine Folgebestellung nicht mehr verfügbar",
@@ -225,8 +231,13 @@
         "countryLabel": "Land",
         "countryPlaceholder": "Land",
         "phoneNumberLabel": "Telefonnummer",
-        "phoneNumberPlaceholder": "Telefonnummer"
-
+        "phoneNumberPlaceholder": "Telefonnummer",
+        "companyNameLabel": "Firma",
+        "companyNamePlaceholder": "Firma",
+        "companyDepartmentLabel": "Abteilung",
+        "companyDepartmentPlaceholder": "Abteilung",
+        "companyVatLabel": "Umsatzsteuer-ID",
+        "companyVatPlaceholder": "Umsatzsteuer-ID"
     },
     "checkout": {
         "itemCounter": "%count% Artikel",
@@ -282,7 +293,7 @@
         "confirmSubmit": "Zahlungspflichtig bestellen",
         "confirmTermsHeader": "AGB und Widerrufsbelehrung",
         "confirmRevocationNotice": "Bitte beachten Sie bei Ihrer Bestellung auch unsere Widerrufsbelehrung.",
-        "confirmTerms": "Ich habe die <a data-toggle='modal' data-url='%tosUrl%' href='%tosUrl%' title='AGB'>AGB</a> Ihres Shops gelesen und bin mit deren Geltung einverstanden.",
+        "confirmTerms": "Ich habe die <a data-toggle=\"modal\" data-url=\"%url%\" href=\"%url%\" title=\"AGB\">AGB</a> Ihres Shops gelesen und bin mit deren Geltung einverstanden.",
         "finishInfoPayment": "Zahlungsart:",
         "finishInfoShipping": "Versandart:",
         "finishHeader": "Vielen Dank für Ihre Bestellung bei %shop%!",
@@ -358,60 +369,16 @@
         "shopServiceHeadline": "Shop Service",
         "informationHeadline": "Informationen",
         "newsletterHeadline": "Newsletter",
-        "serviceHotline": "Unterst&uuml;tzung und Beratung unter: <a href='tel:+49180000000'>0180 - 000000</a> Mo-Fr, 09:00 - 17:00 Uhr",
-        "serviceContactLink": "Oder über unser <a href='%link%' title='Kontaktformular'>Kontaktformular</a>",
+        "serviceHotline": "Unterstützung und Beratung unter: <a href=\"tel:+49180000000\">0180 - 000000</a> Mo-Fr, 09:00 - 17:00 Uhr",
+        "serviceContactLink": "Oder über unser <a href=\"%link%\" title=\"Kontaktformular\">Kontaktformular</a>",
         "newsletterInput": "Ihre E-Mail Adresse",
         "newsletter": "Abonnieren Sie jetzt einfach unseren regelmäßig erscheinenden Newsletter und Sie werden stets als Erster über neue Artikel und Angebote informiert.",
-        "includeVat": "* Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. <a href='#'>Versandkosten</a> und ggf. Nachnahmegebühren, wenn nicht anders beschrieben",
-        "excludeVat": "* Alle Preise verstehen sich zzgl. Mehrwertsteuer und <a href='#'>Versandkosten</a> und ggf. Nachnahmegebühren, wenn nicht anders beschrieben",
+        "includeVat": "* Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. <a href=\"#\">Versandkosten</a> und ggf. Nachnahmegebühren, wenn nicht anders beschrieben",
+        "excludeVat": "* Alle Preise verstehen sich zzgl. Mehrwertsteuer und <a href=\"#\">Versandkosten</a> und ggf. Nachnahmegebühren, wenn nicht anders beschrieben",
         "copyrightInfo": "Realisiert mit Shopware"
     },
     "cookie": {
-        "message": "Diese Website verwendet Cookies, um Ihnen die bestmögliche Funktionalität bieten zu können.&nbsp;<a href='#'>Mehr Informationen</a>",
+        "message": "Diese Website verwendet Cookies, um Ihnen die bestmögliche Funktionalität bieten zu können. <a data-toggle=\"modal\" data-url=\"%url%\" href=\"%url%\" title=\"Mehr Informationen\">Mehr Informationen</a>.",
         "accept": "Einverstanden"
-    },
-    "document": {
-      "invoiceNumber": "Rechnung Nr. %invoiceNumber%",
-      "invoiceHeadline": "Rechnung Nr. %invoiceNumber%",
-      "stornoNumber": "Storno Nr. %stornoNumber%",
-      "stornoHeadline": "Storno Nr. %stornoNumber% für Rechnung Nr. %invoiceNumber%",
-      "deliveryNoteNumber": "Lieferschein Nr. %deliveryNoteNumber%",
-      "deliveryNoteHeadline": "Lieferschein Nr. %deliveryNoteNumber% für Bestellung Nr. %orderNumber%",
-      "creditNoteNumber": "Gutschein Nr. %creditNoteNumber%",
-      "creditNoteHeadline": "Gutschein Nr. %creditNoteNumber% für Rechnung Nr. %invoiceNumber%",
-      "customerNumber": "Kunden-Nr.: %customerNumber%",
-      "date": "Datum: %date%",
-      "orderDate": "Bestelldatum: %orderDate%",
-      "deliveryDate": "Liefertermin: %deliveryDate%",
-      "page": "Seite %pageNumber%",
-      "orderNumber": "Bestell-Nr.: %orderNumber%",
-      "taxNumber": "Steuer-Nr.: %taxNumber%",
-      "vatId": "USt-IdNr.: %vatId%",
-      "taxOffice": "Finanzamt %taxOffice%",
-      "bankAccount": "Bankverbindung",
-      "bankIban": "IBAN: %bankIban%",
-      "bankBic": "BIC: %bankBic%",
-      "placeOfJurisdiction": "Gerichtsstand ist %placeOfJurisdiction%",
-      "placeOfFulfillment": "Erfüllungsort: %placeOfFulfillment%",
-      "ceo": "Geschäftsführer",
-      "lineItems": {
-        "header": {
-          "position": "Pos.",
-          "label": "Bezeichnung",
-          "quantity": "Anz.",
-          "tax": "MwSt.",
-          "unitPrice": "Stückpreis",
-          "articleNumber": "Art Nr.",
-          "total": "Gesamt"
-        },
-        "tax": "zzgl. %taxRate%% MwSt.:",
-        "total": "Gesamtsumme:",
-        "totalNet": "Gesamtsumme Netto:"
-      },
-      "paymentShippingInfo": {
-        "paymentMethod": "Gewählte Zahlungsart: %paymentMethod%",
-        "shippingMethod": "Gewählte Versandart: %shippingMethod%",
-        "additionalInfo": "Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum."
-      }
     }
 }
