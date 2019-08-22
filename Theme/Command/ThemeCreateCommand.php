@@ -147,7 +147,7 @@ EOL;
         return <<<EOL
 {
   "name": "#name#",
-  "author": "Showpare AG",
+  "author": "Shopware AG",
   "style": [
     "@Storefront",
     "Resources/storefront/style/base.scss"
