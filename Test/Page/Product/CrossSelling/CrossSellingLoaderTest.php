@@ -14,7 +14,6 @@ use Shopware\Core\Framework\Test\TestCaseBase\TaxAddToSalesChannelTestBehaviour;
 use Shopware\Core\Framework\Uuid\Uuid;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Shopware\Core\System\SalesChannel\SalesChannelEntity;
-use Shopware\Storefront\Page\Product\CrossSelling\CrossSellingElement;
 use Shopware\Storefront\Page\Product\CrossSelling\CrossSellingLoader;
 
 class CrossSellingLoaderTest extends TestCase
@@ -59,7 +58,7 @@ class CrossSellingLoaderTest extends TestCase
             'sortBy' => ProductCrossSellingDefinition::SORT_BY_PRICE,
             'sortDirection' => FieldSorting::ASCENDING,
             'active' => true,
-            'productStreamId' => $this->createProductStream()
+            'productStreamId' => $this->createProductStream(),
         ]];
 
         $this->productRepository->create([$productData], $this->salesChannelContext->getContext());
@@ -85,7 +84,7 @@ class CrossSellingLoaderTest extends TestCase
 
         $crossSellingIds = [
             Uuid::randomHex(),
-            Uuid::randomHex()
+            Uuid::randomHex(),
         ];
         $productData = $this->getProductData($productId);
         $productData['crossSellings'] = [[
@@ -93,13 +92,13 @@ class CrossSellingLoaderTest extends TestCase
             'name' => 'First Cross Selling',
             'position' => 1,
             'active' => true,
-            'productStreamId' => $this->createProductStream()
+            'productStreamId' => $this->createProductStream(),
         ], [
             'id' => $crossSellingIds[1],
             'name' => 'Second Cross Selling',
             'position' => 2,
             'active' => true,
-            'productStreamId' => $this->createProductStream()
+            'productStreamId' => $this->createProductStream(),
         ]];
 
         $this->productRepository->create([$productData], $this->salesChannelContext->getContext());
@@ -126,11 +125,11 @@ class CrossSellingLoaderTest extends TestCase
                     [
                         'type' => 'equalsAny',
                         'field' => 'id',
-                        'value' => $randomProductIds
-                    ]
+                        'value' => $randomProductIds,
+                    ],
                 ],
-                'name' => 'testStream'
-            ]
+                'name' => 'testStream',
+            ],
         ], $this->salesChannelContext->getContext());
 
         return $id;
@@ -152,10 +151,10 @@ class CrossSellingLoaderTest extends TestCase
         return $products;
     }
 
-
     private function getProductData(?string $id = null, ?string $manufacturerId = null, ?string $taxId = null): array
     {
         $price = random_int(0, 10);
+
         return [
             'id' => $id ?? Uuid::randomHex(),
             'productNumber' => Uuid::randomHex(),
