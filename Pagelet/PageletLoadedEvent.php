@@ -1,14 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Shopware\Storefront\Page;
+namespace Shopware\Storefront\Pagelet;
 
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\Event\NestedEvent;
-use Shopware\Core\Framework\Struct\Struct;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Symfony\Component\HttpFoundation\Request;
 
-abstract class PageLoadedEvent extends NestedEvent
+abstract class PageletLoadedEvent extends NestedEvent
 {
     /**
      * @var SalesChannelContext
@@ -27,9 +26,9 @@ abstract class PageLoadedEvent extends NestedEvent
     }
 
     /**
-     * @return Page|Struct
+     * @return Pagelet
      */
-    abstract public function getPage();
+    abstract public function getPagelet();
 
     public function getSalesChannelContext(): SalesChannelContext
     {
