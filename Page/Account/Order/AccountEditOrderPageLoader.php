@@ -3,27 +3,26 @@
 namespace Shopware\Storefront\Page\Account\Order;
 
 use Shopware\Core\Checkout\Cart\Exception\CustomerNotLoggedInException;
-use Shopware\Core\Checkout\Customer\SalesChannel\AccountService;
 use Shopware\Core\Checkout\Order\SalesChannel\AbstractOrderRoute;
 use Shopware\Core\Checkout\Order\SalesChannel\OrderRouteResponseStruct;
+use Shopware\Core\Checkout\Payment\PaymentMethodCollection;
+use Shopware\Core\Checkout\Payment\SalesChannel\AbstractPaymentMethodRoute;
 use Shopware\Core\Content\Category\Exception\CategoryNotFoundException;
 use Shopware\Core\Framework\DataAbstractionLayer\Exception\InconsistentCriteriaIdsException;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
-use Shopware\Core\Framework\DataAbstractionLayer\Search\EntitySearchResult;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\RequestCriteriaBuilder;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Sorting\FieldSorting;
 use Shopware\Core\Framework\Routing\Exception\MissingRequestParameterException;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
-use Shopware\Storefront\Framework\Page\StorefrontSearchResult;
-use Shopware\Storefront\Page\GenericPageLoaderInterface;
+use Shopware\Storefront\Page\GenericPageLoader;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class AccountOrderPageLoader
+class AccountEditOrderPageLoader
 {
     /**
-     * @var GenericPageLoaderInterface
+     * @var GenericPageLoader
      */
     private $genericLoader;
 
@@ -43,22 +42,22 @@ class AccountOrderPageLoader
     private $requestCriteriaBuilder;
 
     /**
-     * @var AccountService
+     * @var AbstractPaymentMethodRoute
      */
-    private $accountService;
+    private $paymentMethodRoute;
 
     public function __construct(
-        GenericPageLoaderInterface $genericLoader,
+        GenericPageLoader $genericLoader,
         EventDispatcherInterface $eventDispatcher,
         AbstractOrderRoute $orderRoute,
         RequestCriteriaBuilder $requestCriteriaBuilder,
-        AccountService $accountService
+        AbstractPaymentMethodRoute $paymentMethodRoute
     ) {
         $this->genericLoader = $genericLoader;
         $this->eventDispatcher = $eventDispatcher;
         $this->orderRoute = $orderRoute;
         $this->requestCriteriaBuilder = $requestCriteriaBuilder;
-        $this->accountService = $accountService;
+        $this->paymentMethodRoute = $paymentMethodRoute;
     }
 
     /**
@@ -67,7 +66,7 @@ class AccountOrderPageLoader
      * @throws InconsistentCriteriaIdsException
      * @throws MissingRequestParameterException
      */
-    public function load(Request $request, SalesChannelContext $salesChannelContext): AccountOrderPage
+    public function load(Request $request, SalesChannelContext $salesChannelContext): AccountEditOrderPage
     {
         if (!$salesChannelContext->getCustomer() && $request->get('deepLinkCode', false) === false) {
             throw new CustomerNotLoggedInException();
@@ -75,60 +74,70 @@ class AccountOrderPageLoader
 
         $page = $this->genericLoader->load($request, $salesChannelContext);
 
-        $page = AccountOrderPage::createFrom($page);
+        $page = AccountEditOrderPage::createFrom($page);
 
-        $page->setOrders(StorefrontSearchResult::createFrom($this->getOrders($request, $salesChannelContext)));
+        $orderRouteResponse = $this->getOrder($request, $salesChannelContext);
+
+        $page->setOrder($orderRouteResponse->getOrders()->first());
+
+        $page->setPaymentChangeable($orderRouteResponse->getPaymentChangeable($page->getOrder()->getId()));
+
+        $page->setPaymentMethods($this->getPaymentMethods($salesChannelContext));
 
         $page->setDeepLinkCode($request->get('deepLinkCode'));
 
-        if ($request->get('deepLinkCode') && $page->getOrders() !== null && $page->getOrders()->first() !== null) {
-            $this->accountService->login(
-                $page->getOrders()->first()->getOrderCustomer()->getCustomer()->getEmail(),
-                $salesChannelContext,
-                true
-            );
-        }
-
         $this->eventDispatcher->dispatch(
-            new AccountOrderPageLoadedEvent($page, $salesChannelContext, $request)
+            new AccountEditOrderPageLoadedEvent($page, $salesChannelContext, $request)
         );
 
         return $page;
     }
 
-    private function getOrders(Request $request, SalesChannelContext $context): EntitySearchResult
+    private function getOrder(Request $request, SalesChannelContext $context): OrderRouteResponseStruct
     {
-        $criteria = $this->createCriteria($request);
+        $criteria = $this->createCriteria($request, $context);
         $routeRequest = new Request();
         $routeRequest->query->replace($this->requestCriteriaBuilder->toArray($criteria));
+        $routeRequest->query->set('checkPromotion', true);
 
         /** @var OrderRouteResponseStruct $responseStruct */
         $responseStruct = $this->orderRoute->load($routeRequest, $context)->getObject();
 
-        return $responseStruct->getOrders();
+        return $responseStruct;
     }
 
-    private function createCriteria(Request $request): Criteria
+    private function createCriteria(Request $request, SalesChannelContext $context): Criteria
     {
-        $limit = (int) $request->query->get('limit', 10);
-        $page = (int) $request->query->get('p', 1);
-
-        $criteria = (new Criteria())
-            ->addSorting(new FieldSorting('order.createdAt', FieldSorting::DESCENDING))
+        if ($request->get('orderId')) {
+            $criteria = new Criteria([$request->get('orderId')]);
+        } else {
+            $criteria = new Criteria([]);
+        }
+        $criteria->addAssociation('lineItems.cover')
             ->addAssociation('transactions.paymentMethod')
-            ->addAssociation('deliveries.shippingMethod')
-            ->addAssociation('orderCustomer.customer')
-            ->addAssociation('lineItems')
-            ->setLimit($limit)
-            ->setOffset(($page - 1) * $limit)
-            ->setTotalCountMode(Criteria::TOTAL_COUNT_MODE_NEXT_PAGES);
+            ->addAssociation('deliveries.shippingMethod');
 
         $criteria->getAssociation('transactions')->addSorting(new FieldSorting('createdAt'));
 
-        if ($request->get('deepLinkCode')) {
+        if ($context->getCustomer() && $context->getCustomer()->getId()) {
+            $criteria->addFilter(new EqualsFilter('order.orderCustomer.customerId', $context->getCustomer()->getId()));
+        } elseif ($request->get('deepLinkCode')) {
             $criteria->addFilter(new EqualsFilter('deepLinkCode', $request->get('deepLinkCode')));
+        } else {
+            throw new CustomerNotLoggedInException();
         }
 
         return $criteria;
+    }
+
+    /**
+     * @throws InconsistentCriteriaIdsException
+     */
+    private function getPaymentMethods(SalesChannelContext $salesChannelContext): PaymentMethodCollection
+    {
+        $request = new Request();
+        $request->query->set('onlyAvailable', 1);
+
+        return $this->paymentMethodRoute->load($request, $salesChannelContext)->getPaymentMethods();
     }
 }
