@@ -5,7 +5,7 @@
 /* eslint-disable */
 import BaseWishlistStoragePlugin from 'src/plugin/wishlist/base-wishlist-storage.plugin';
 
-describe('WishlistStorage tests', () => {
+describe('BaseWishlistStoragePlugin tests', () => {
     let wishlistStoragePlugin = undefined;
     let spyInitializePlugins = jest.fn();
 
@@ -13,7 +13,6 @@ describe('WishlistStorage tests', () => {
         // create mocks
         window.wishlistEnabled = true;
 
-        // mock search plugin
         const mockElement = document.createElement('div');
 
         window.PluginManager = {
@@ -35,11 +34,11 @@ describe('WishlistStorage tests', () => {
         spyInitializePlugins.mockClear();
     });
 
-    test('Wishlist Storage widget plugin exists', () => {
+    test('BaseWishlistStoragePlugin exists', () => {
         expect(typeof wishlistStoragePlugin).toBe('object');
     });
 
-    test('Wishlist base storage add/remove/has/getCurrentCounter methods test', () => {
+    test('BaseWishlistStoragePlugin methods test', () => {
         const products = {
             'PRODUCT_1': 'product 1',
             'PRODUCT_2': 'product 2',
@@ -88,6 +87,8 @@ describe('WishlistStorage tests', () => {
         expect(loadedEventFired).toEqual(true);
         expect(removedProductEventFired).toEqual(true);
         expect(addedProductEventFired).toEqual(true);
+
+        expect(wishlistStoragePlugin.getProducts()).toEqual(products)
     });
 });
 
