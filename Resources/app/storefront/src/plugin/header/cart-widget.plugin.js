@@ -24,6 +24,8 @@ export default class CartWidgetPlugin extends Plugin {
         const storedContent = Storage.getItem(this.options.cartWidgetStorageKey);
         if (storedContent) {
             this.el.innerHTML = storedContent;
+        } else {
+            this.fetch();
         }
 
         this.$emitter.publish('insertStoredContent');
