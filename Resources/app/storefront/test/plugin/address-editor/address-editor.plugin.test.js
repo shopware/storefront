@@ -47,7 +47,7 @@ describe('AddressEditorPlugin test', () => {
                 <button class="edit-address" data-toggle="collapse" data-target="#shipping-address-create-edit">Edit address</button>
 
                 <div id="shipping-addressEditorAccordion">
-                    <div id="shipping-address-create-edit" class="collapse" data-parent="#shipping-addressEditorAccordion">
+                    <div id="shipping-address-create-edit" class="collapse" data-bs-parent="#shipping-addressEditorAccordion">
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@ describe('AddressEditorPlugin test', () => {
                 <button class="edit-address" data-toggle="collapse" data-target="#billing-address-create-edit">Edit address</button>
 
                 <div id="billing-addressEditorAccordion">
-                    <div id="billing-address-create-edit" class="collapse" data-parent="#billing-addressEditorAccordion">
+                    <div id="billing-address-create-edit" class="collapse" data-bs-parent="#billing-addressEditorAccordion">
                         <form method="post" data-form-ajax-submit="true" class="js-close-address-editor">
                             <input type="text" class="form-control is-invalid" id="billing-addresscompany" placeholder="Enter company..." name="address[company]" value="">
                             <div class="address-form-actions">
@@ -167,7 +167,7 @@ describe('AddressEditorPlugin test', () => {
                 <button class="edit-address" data-toggle="collapse" data-target="#billing-address-create-edit">Edit address</button>
 
                 <div id="billing-addressEditorAccordion">
-                    <div id="billing-address-create-edit" class="collapse" data-parent="#billing-addressEditorAccordion">
+                    <div id="billing-address-create-edit" class="collapse" data-bs-parent="#billing-addressEditorAccordion">
                         <form method="post" data-form-ajax-submit="true" class="js-close-address-editor">
                             <input type="text" class="form-control" id="billing-addresscompany" placeholder="Enter company..." name="address[company]" value="">
                             <div class="address-form-actions">
