@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\HttpCache\StoreInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
- * @deprecated tag:v6.6.0 - reason:becomes-internal
+ * @deprecated tag:v6.6.0 - reason:becomes-internal - Use \Shopware\Core\Framework\Adapter\Cache\Http\CacheStore instead
  */
 #[Package('core')]
 class CacheStore implements StoreInterface
@@ -93,7 +93,7 @@ class CacheStore implements StoreInterface
             return $key;
         }
 
-        if ($response instanceof StorefrontResponse) {
+        if (!Feature::isActive('v6.6.0.0') && $response instanceof StorefrontResponse) {
             $response->setData([]);
             $response->setContext(null);
         }
