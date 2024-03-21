@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([["plugin_qrcode_page-qrcode-generator_ts"],{2267:(e,t,o)=>{o.r(t),o.d(t,{default:()=>r});var i=o(9568),n=o(9640);class r extends i.Z{init(){let e=this.el;e&&n.toCanvas(window.location.href,this.options,function(t,o){if(t)throw t;e.appendChild(o)})}}r.options={errorCorrectionLevel:"H",width:256}}}]);
