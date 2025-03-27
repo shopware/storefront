@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "assets/storefront-DOf-XamQ.js",
+    "name": "storefront",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/storefront-CpJsf6g6.css"
+    ]
+  }
+}
