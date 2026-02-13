@@ -46,6 +46,7 @@
     "postcss-pxtorem": "6.1.0",
     "qrcode": "1.5.4",
     "sass": "1.83.4",
+    "sass-embedded": "^1.97.3",
     "sass-loader": "16.0.4",
     "style-loader": "4.0.0",
     "swc-loader": "0.2.6",
