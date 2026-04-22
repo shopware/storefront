@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "assets/storefront-CLOBVj9t.js",
+    "name": "storefront",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/storefront-LFaCMnyI.css"
+    ]
+  }
+}
