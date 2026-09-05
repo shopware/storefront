@@ -1,0 +1,80 @@
+{
+  "extension/sw-sales-channel/view/sw-sales-channel-detail-theme/index.js": {
+    "file": "assets/index-Cb3TQ0Fo.js",
+    "name": "index",
+    "src": "extension/sw-sales-channel/view/sw-sales-channel-detail-theme/index.js",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-Bo3vT0IX.css"
+    ]
+  },
+  "main.js": {
+    "file": "assets/storefront-BgHYE-fp.js",
+    "name": "storefront",
+    "src": "main.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "modules/sw-theme-manager/page/sw-theme-manager-detail/index.js",
+      "modules/sw-theme-manager/page/sw-theme-manager-list/index.js",
+      "modules/sw-theme-manager/component/sw-theme-list-item/index.js",
+      "modules/sw-theme-manager/component/sw-theme-modal/index.js",
+      "modules/sw-settings-storefront/page/sw-settings-storefront-index/index.js",
+      "modules/sw-settings-storefront/component/sw-settings-storefront-configuration/index.js",
+      "extension/sw-sales-channel/view/sw-sales-channel-detail-theme/index.js"
+    ]
+  },
+  "modules/sw-settings-storefront/component/sw-settings-storefront-configuration/index.js": {
+    "file": "assets/index-BXAiBkRg.js",
+    "name": "index",
+    "src": "modules/sw-settings-storefront/component/sw-settings-storefront-configuration/index.js",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-AdiC7-6m.css"
+    ]
+  },
+  "modules/sw-settings-storefront/page/sw-settings-storefront-index/index.js": {
+    "file": "assets/index-CFidUFd2.js",
+    "name": "index",
+    "src": "modules/sw-settings-storefront/page/sw-settings-storefront-index/index.js",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-ubO5oMCl.css"
+    ]
+  },
+  "modules/sw-theme-manager/component/sw-theme-list-item/index.js": {
+    "file": "assets/index-BZ1Nuh_T.js",
+    "name": "index",
+    "src": "modules/sw-theme-manager/component/sw-theme-list-item/index.js",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-18axwCd3.css"
+    ]
+  },
+  "modules/sw-theme-manager/component/sw-theme-modal/index.js": {
+    "file": "assets/index-DQCnRCs9.js",
+    "name": "index",
+    "src": "modules/sw-theme-manager/component/sw-theme-modal/index.js",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-CZcllLQr.css"
+    ]
+  },
+  "modules/sw-theme-manager/page/sw-theme-manager-detail/index.js": {
+    "file": "assets/index-Dd7QAY4u.js",
+    "name": "index",
+    "src": "modules/sw-theme-manager/page/sw-theme-manager-detail/index.js",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-w7zi-I59.css"
+    ]
+  },
+  "modules/sw-theme-manager/page/sw-theme-manager-list/index.js": {
+    "file": "assets/index-C5l4A7yQ.js",
+    "name": "index",
+    "src": "modules/sw-theme-manager/page/sw-theme-manager-list/index.js",
+    "isDynamicEntry": true,
+    "css": [
+      "assets/index-BfYLbxMu.css"
+    ]
+  }
+}
