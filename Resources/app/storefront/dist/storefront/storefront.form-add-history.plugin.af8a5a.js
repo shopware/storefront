@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[87095],{7095:(s,t,e)=>{e.r(t),e.d(t,{default:()=>n});var i=e(9568);class n extends i.Z{init(){this.el.addEventListener("submit",this.pushHistoryEntries.bind(this))}pushHistoryEntries(){this.options.entries.forEach(s=>{let{state:t={},title:e,url:i}=s;history.pushState(t,e,i)})}}n.options={entries:[]}}}]);
