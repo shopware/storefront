@@ -267,6 +267,12 @@ class ThemeCompiler implements ThemeCompilerInterface
         $copyFiles = [];
 
         foreach ($scriptsDist as $folderName => $pluginConfig) {
+            // Reject folder names that are not a plain identifier to prevent path traversal
+            // (e.g. "../../etc") from escaping the intended source and destination roots.
+            if ($folderName !== 'storefront' && !preg_match('/^[\w-]+$/', (string) $folderName)) {
+                continue;
+            }
+
             // For themes, we get basePath with Resources and for Plugins without, so we always remove and add it again
             $pathToJsFiles = $distRelativePath;
             if ($folderName !== 'storefront') {
@@ -288,7 +294,9 @@ class ThemeCompiler implements ThemeCompilerInterface
             $targetPath = $themePath . '/js/' . $folderName;
             foreach ($files as $file) {
                 $filePath = $file->getRealPath();
-                if ($filePath) {
+                // Ensure the resolved source file still lives inside the resolved source directory,
+                // guarding against symlinks or traversal sequences escaping the approved root.
+                if ($filePath && str_starts_with($filePath, rtrim($pathToJsFiles, '/') . '/')) {
                     $copyFiles[] = new CopyBatchInput($filePath, [$targetPath . '/' . $file->getFilename()], $this->visibility);
                 }
             }
