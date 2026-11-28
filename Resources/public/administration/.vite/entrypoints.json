@@ -1,0 +1,31 @@
+{
+  "base": "/bundles/storefront/administration/",
+  "entryPoints": {
+    "storefront": {
+      "css": [],
+      "dynamic": [
+        "/bundles/storefront/administration/assets/index-D__7QT0i.js",
+        "/bundles/storefront/administration/assets/index-Ckz03lSD.js",
+        "/bundles/storefront/administration/assets/index-maZTOJ76.js",
+        "/bundles/storefront/administration/assets/index-BxQoeCkh.js",
+        "/bundles/storefront/administration/assets/index-C8SR8tZP.js",
+        "/bundles/storefront/administration/assets/index-DTo-q144.js",
+        "/bundles/storefront/administration/assets/index-Bke18E0z.js"
+      ],
+      "js": [
+        "/bundles/storefront/administration/assets/storefront-BflfIQ9Q.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}
